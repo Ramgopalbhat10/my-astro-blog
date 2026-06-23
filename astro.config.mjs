@@ -1,23 +1,22 @@
 import { defineConfig } from "astro/config";
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from '@tailwindcss/vite';
 import { SITE } from "./src/consts";
 
 export default defineConfig({
-  output: 'hybrid',
   adapter: vercel({
     webAnalytics: { enabled: true }
   }),
   site: SITE.SITE,
-  integrations: [mdx(), sitemap(), tailwind()],
+  integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {
       theme: 'nord',
     }
   },
-  experimental: {
-    contentCollectionCache: true
-  }
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
