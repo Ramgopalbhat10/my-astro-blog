@@ -71,7 +71,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
   );
 </script>
 
-<script is:inline>
+<script is:inline data-cfasync="false">
   function init() {
     preloadTheme();
     onScroll();
