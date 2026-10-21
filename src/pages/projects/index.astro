@@ -1,13 +1,20 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import ProjectEntry from "@components/ProjectEntry.astro";
 import { PROJECTS } from "@consts";
 
-const projects = (await getCollection("projects"))
+const collection = (await getCollection("projects"))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const projects = await Promise.all(
+  collection.map(async (item) => {
+    const { Content } = await render(item);
+    return { ...item, Content };
+  })
+);
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
@@ -16,11 +23,18 @@ const projects = (await getCollection("projects"))
       <div class="animate font-semibold text-black dark:text-white">
         Projects
       </div>
-      <ul class="animate flex flex-col gap-4">
+      <ul class="flex flex-col space-y-4">
         {
-          projects.map((project) => (
-            <li>
-              <ArrowCard entry={project}/>
+          projects.map(project => (
+            <li class="animate">
+              <ProjectEntry
+                title={project.data.title}
+                date={project.data.date}
+                demoURL={project.data.demoURL}
+                repoURL={project.data.repoURL}
+              >
+                <project.Content />
+              </ProjectEntry>
             </li>
           ))
         }
