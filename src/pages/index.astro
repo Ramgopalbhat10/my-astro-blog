@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import ProjectEntry from "@components/ProjectEntry.astro";
 import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
@@ -18,6 +19,18 @@ const allwork = (await getCollection("work"))
 
 const work = await Promise.all(
   allwork.map(async (item) => {
+    const { Content } = await render(item);
+    return { ...item, Content };
+  })
+);
+
+const allprojects = (await getCollection("projects"))
+  .filter(project => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+
+const projects = await Promise.all(
+  allprojects.map(async (item) => {
     const { Content } = await render(item);
     return { ...item, Content };
   })
@@ -89,7 +102,7 @@ const work = await Promise.all(
         </ul>
       </section>
 
-      <!-- <section class="animate space-y-6">
+      <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">
             Recent projects
@@ -98,14 +111,21 @@ const work = await Promise.all(
             See all projects
           </Link>
         </div>
-        <ul class="flex flex-col gap-4">
+        <ul class="flex flex-col space-y-4">
           {projects.map(project => (
             <li>
-              <ArrowCard entry={project} />
+              <ProjectEntry
+                title={project.data.title}
+                date={project.data.date}
+                demoURL={project.data.demoURL}
+                repoURL={project.data.repoURL}
+              >
+                <project.Content />
+              </ProjectEntry>
             </li>
           ))}
         </ul>
-      </section> -->
+      </section>
 
       <section class="animate space-y-4">
         <h5 class="font-semibold text-black dark:text-white">

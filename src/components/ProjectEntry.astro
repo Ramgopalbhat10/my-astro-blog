@@ -1,0 +1,47 @@
+---
+import Link from "@components/Link.astro";
+
+interface Props {
+  title: string;
+  date: Date;
+  demoURL?: string;
+  repoURL?: string;
+}
+
+const { title, date, demoURL, repoURL } = Astro.props;
+const label = date.toLocaleDateString("en-US", {
+  month: "short",
+  year: "numeric",
+});
+---
+
+<div class="text-sm opacity-75">
+  <time datetime={date.toISOString()}>
+    {label}
+  </time>
+</div>
+<div class="font-semibold text-black dark:text-white">
+  {title}
+</div>
+{(demoURL || repoURL) && (
+  <div class="flex gap-1 text-sm opacity-75">
+    {demoURL && (
+      <Link href={demoURL} external>
+        demo
+      </Link>
+    )}
+    {demoURL && repoURL && (
+      <span>
+        /
+      </span>
+    )}
+    {repoURL && (
+      <Link href={repoURL} external>
+        repo
+      </Link>
+    )}
+  </div>
+)}
+<article>
+  <slot />
+</article>
