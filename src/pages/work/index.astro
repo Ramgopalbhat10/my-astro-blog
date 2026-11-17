@@ -19,33 +19,64 @@ const work = await Promise.all(
 <PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">
-        Work
+      <div class="animate space-y-4">
+        <h1 class="font-semibold text-black dark:text-white">Work</h1>
+        <article>
+          <p>
+            I build enterprise search and applied AI systems end to end, from indexing
+            and retrieval to agent execution. My experience spans hands-on delivery,
+            evaluation-driven architecture decisions, and mentoring engineers.
+          </p>
+        </article>
       </div>
-      <ul class="flex flex-col space-y-4">
+      <ul class="flex flex-col space-y-10">
         { 
           work.map(entry => (
             <li class="animate">
-              <div class="text-sm opacity-75">
+              <div class="text-sm text-neutral-600 dark:text-neutral-400">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>
-              <div class="font-semibold text-black dark:text-white">
+              <h2 class="font-semibold text-black dark:text-white">
                 {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
+              </h2>
+              <div class="text-sm text-neutral-600 dark:text-neutral-400">
                 {entry.data.role}
               </div>
               <article>
+                <p>{entry.data.summary}</p>
                 <entry.Content />
               </article>
             </li>
           ))
         }
       </ul>
-<!-- 
-      <ul class="animate flex flex-col gap-4">
-
-      </ul> -->
+      <section class="animate space-y-4" aria-labelledby="toolkit-heading">
+        <h2 id="toolkit-heading" class="font-semibold text-black dark:text-white">Technical toolkit</h2>
+        <dl class="space-y-4 text-neutral-700 dark:text-neutral-300">
+          <div>
+            <dt class="font-semibold text-black dark:text-white">AI &amp; search</dt>
+            <dd>RAG, LLMs, embeddings, vector databases, evaluations</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-black dark:text-white">Agents &amp; tools</dt>
+            <dd>Devin, Skills, MCP, ACP, sandboxes</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-black dark:text-white">Languages</dt>
+            <dd>Python, Java, JavaScript, TypeScript</dd>
+          </div>
+          <div>
+            <dt class="font-semibold text-black dark:text-white">Engineering</dt>
+            <dd>Next.js, Node.js, Spring Boot, FastAPI, Express.js, MongoDB, Redis, Elasticsearch</dd>
+          </div>
+        </dl>
+      </section>
+      <section class="animate space-y-4" aria-labelledby="education-heading">
+        <h2 id="education-heading" class="font-semibold text-black dark:text-white">Education</h2>
+        <article>
+          <p>B.Tech in Computer Science, JNTUA College of Engineering, 2013–2017.</p>
+        </article>
+      </section>
     </div>
   </Container>
 </PageLayout>

@@ -1,12 +1,11 @@
 ---
 company: "Carelon Global Solutions"
 role: "Senior Software Engineer"
-dateStart: "08/20/2021"
-dateEnd: "Current"
+summary: "I developed the indexing and retrieval foundations for enterprise search, moving beyond keyword matching and improving performance across the search pipeline."
+dateStart: "2021-08-01"
+dateEnd: "2025-03-01"
 ---
 
-Enterprise AI search which connects to various source systems and internal knowledge base to provide search with better accuracy and relevancy.
-- Built new indexing and search system from scratch which connects to various source systems including newly adopted Kontent.ai CMS and stores vectorized documents in Elasticsearch.
-- Used SBERT and advanced NLP models for text embedding, text classification, spell check and other NLP tasks.
-- Optimized code of indexing and searching using concurrency and multi-threading concepts which reduced the latency of the AI search API by 30-40% and indexing jobs by 50%.
-- Increased the overall search relevancy and accuracy by 40% by following recommended strategies and fine tuning data which helped the users find accurate information in search results.
+- **Hybrid retrieval:** Replaced keyword/synonym-only search with hybrid keyword and vector retrieval using approximate nearest neighbor (ANN) search, reciprocal rank fusion (RRF), and reranking to improve relevance.
+- **Search performance:** Analyzed Datadog metrics and optimized the RAG pipeline to reduce search API latency by 30–40%.
+- **Indexing throughput:** Reduced indexing time by 50% through concurrency and multithreading.

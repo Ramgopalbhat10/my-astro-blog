@@ -2,26 +2,20 @@ import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
   NAME: "MRGB",
-  EMAIL: "ramgopalbhat10@gmail.com",
+  EMAIL: "subramanyaramgopal@gmail.com",
   SITE: "https://mrgb.in",
-  NUM_POSTS_ON_HOMEPAGE: 2,
   NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "A minimal and lightweight blog and portfolio.",
-};
-
-export const BLOG: Metadata = {
-  TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
+  DESCRIPTION: "Ram Gopal M is a hands-on Tech Lead building enterprise search, retrieval-augmented generation systems, and internal AI agent platforms.",
 };
 
 export const WORK: Metadata = {
   TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+  DESCRIPTION: "Engineering experience across enterprise search, applied AI, agent platforms, and backend systems at Carelon Global Solutions and Accenture.",
 };
 
 export const PROJECTS: Metadata = {
