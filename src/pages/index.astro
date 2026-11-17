@@ -2,27 +2,14 @@
 import { getCollection, render } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
 import ProjectEntry from "@components/ProjectEntry.astro";
 import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 
-const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
+const work = (await getCollection("work"))
   .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
   .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await render(item);
-    return { ...item, Content };
-  })
-);
 
 const allprojects = (await getCollection("projects"))
   .filter(project => !project.data.draft)
@@ -40,44 +27,29 @@ const projects = await Promise.all(
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Ram <span class="text-xl">👋🏻</span> 
-    </h4>
+    <h1 class="animate font-semibold text-black dark:text-white">
+      Hi, I'm Ram Gopal.
+    </h1>
     <div class="space-y-16">
       <section>
         <article class="space-y-4">
-          <p class="animate">
-            A Fullstack developer with a prime focus on crafting clean and user friendly experiences.
+          <p class="animate not-prose font-sans font-semibold text-black dark:text-white">
+            Tech Lead, Applied AI &amp; Enterprise Search
           </p>
           <p class="animate">
-            I enjoy playing around with new technologies and advanced techniques for building web applications which can be turned into a production ready apps.
+            I'm a hands-on Tech Lead at Carelon Global Solutions in Bengaluru, building enterprise search and internal AI agent platforms.
+          </p>
+          <p class="animate">
+            My work spans indexing pipelines, hybrid retrieval, and retrieval-augmented generation (RAG), alongside agent platforms that support day-to-day engineering. I use evaluations to guide technical decisions and mentor engineers in adopting AI development tools.
           </p>
         </article>
       </section>
 
-      <section class="animate space-y-6 home-post">
+      <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
-          </h5>
-          <Link href="/blog">
-            See all posts
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {blog.map(post => (
-            <li>
-              <ArrowCard entry={post} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6 home-work">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
+          <h2 class="font-semibold text-black dark:text-white">
+            Work experience
+          </h2>
           <Link href="/work">
             See all work
           </Link>
@@ -85,17 +57,17 @@ const projects = await Promise.all(
         <ul class="flex flex-col space-y-4">
           {work.map(entry => (
             <li>
-              <div class="text-sm opacity-75">
+              <div class="text-sm text-neutral-600 dark:text-neutral-400">
                 {dateRange(entry.data.dateStart, entry.data.dateEnd)}
               </div>
-              <div class="font-semibold text-black dark:text-white">
+              <h3 class="font-semibold text-black dark:text-white">
                 {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
+              </h3>
+              <div class="text-sm text-neutral-600 dark:text-neutral-400">
                 {entry.data.role}
               </div>
               <article>
-                <entry.Content />
+                <p>{entry.data.summary}</p>
               </article>
             </li>
           ))}
@@ -104,9 +76,9 @@ const projects = await Promise.all(
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h2 class="font-semibold text-black dark:text-white">
             Recent projects
-          </h5>
+          </h2>
           <Link href="/projects">
             See all projects
           </Link>
@@ -128,13 +100,13 @@ const projects = await Promise.all(
       </section>
 
       <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
+        <h2 class="font-semibold text-black dark:text-white">
+          Let's connect
+        </h2>
         <article>
           <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
+            For conversations about enterprise search, applied AI, or developer tooling,
+            connect with me on LinkedIn or send me an email.
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">
@@ -146,7 +118,7 @@ const projects = await Promise.all(
               {"/"}
             </li>
           ))}
-          <li class="line-clamp-1">
+          <li class="min-w-0 break-all">
             <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
               {SITE.EMAIL}
             </Link>

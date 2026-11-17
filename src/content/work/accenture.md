@@ -1,11 +1,10 @@
 ---
 company: "Accenture"
 role: "Associate Software Engineer"
-dateStart: "05/24/2017"
-dateEnd: "11/07/2019"
+summary: "I developed backend services for a telecom e-commerce platform as it moved from a monolith to microservices."
+dateStart: "2017-05-01"
+dateEnd: "2019-11-01"
 ---
 
-E-Commerce telecom application where users can browse the products, plans, do cart operations, place orders etc.
-- Responsible in refactoring the monolithic application to microservices with best practices.
-- Created RESTful API s from scratch in Spring Boot and Spring Cloud. 
-- Integrated with cloud services like Firebase and AWS SNS for URL shortening and sending SMS.
+- **Microservices migration:** Built REST APIs with Spring Boot and Spring Cloud for a telecom e-commerce monolith-to-microservices migration.
+- **Service integrations:** Integrated Firebase and AWS SNS for URL shortening and SMS notifications.

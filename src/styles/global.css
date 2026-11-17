@@ -78,10 +78,6 @@ html.scrolled #back-to-top {
   @apply opacity-100 pointer-events-auto;
 }
 
-section.home-work article ul {
-  display: none;
-}
-
 pre.astro-code {
   background-color: #252525 !important;
 }
